@@ -14,33 +14,44 @@ app.use(
   );
 
 
-/* Importamos rutas */
+  /* Importamos rutas */
 
-const mainRoutes = require('./src/routes/main_routes')
-const adminRoutes = require('./src/routes/admin_routes')
-const shopRoutes = require('./src/routes/shop_routes')
-const authRoutes = require('./src/routes/auth_routes')
+  const mainRoutes = require('./src/routes/main_routes')
+  const adminRoutes = require('./src/routes/admin_routes')
+  const shopRoutes = require('./src/routes/shop_routes')
+  const authRoutes = require('./src/routes/auth_routes')
 
-const PORT = 3000;
+  const PORT = 3000;
 
-app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, './src/views'));
-
-
+  app.set('view engine', 'ejs');
+  app.set('views', path.join(__dirname, './src/views'));
 
 
-app.use(express.static('public'));
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
-app.use(methodOverride('_method'));
 
-app.use('/', mainRoutes);
-app.use('/shop', shopRoutes);
-app.use('/admin', adminRoutes);
-app.use('/auth', authRoutes);
+
+  app.use(express.static('public'));
+  app.use(express.urlencoded({ extended: true }));
+  app.use(express.json());
+  app.use(methodOverride('_method'));
+
+  app.use('/', mainRoutes);
+  app.use('/shop', shopRoutes);
+  app.use('/admin', adminRoutes);
+  app.use('/auth', authRoutes);
 
 
 app.listen(PORT, () => {
     console.log(`Servidor inicializado en http://localhost:${PORT}`)
+
+
+
 })
 
+/* MULTER */
+const storage = multer.diskStorage({ //configuracion y rutas
+  destination: (req, file, cb) => cb(null, path.resolve (__dirname, '/public/uploads')),
+  filename: (req, file, cb) => cb (null, date.now () + '_' + file.originalname)
+});
+
+
+const uploadFile = multer ({storage}); //instancia y configuracion
