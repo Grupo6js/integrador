@@ -2,6 +2,7 @@ const path = require('path');
 const articulos = require('../data/articulos.json')
 
 
+
 module.exports = { 
     shop: (req, res) => {  
         res.render('shop/shop',{title: "Shop", articulos});

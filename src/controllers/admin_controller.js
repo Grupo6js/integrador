@@ -77,8 +77,7 @@ module.exports = {
       const data = fs.readFileSync(jsonFile, 'utf-8');
       let jsonData = JSON.parse(data);
       const body = req.body;
-
-      
+            
       //busco el id mas alto
       const highestId = jsonData.reduce((maxId, item) => (item.id > maxId ? item.id : maxId), 0);   
 
@@ -119,9 +118,9 @@ module.exports = {
       
           // Sobrescribir el json con el nuevo array
           const filePath = path.resolve(__dirname, '../data/articulos.json');
-          fs.writeFileSync(filePath, JSON.stringify(articulos, null, 2));//null no filtra y 2 deja don indentaciones en el json
+          fs.writeFileSync(filePath, JSON.stringify(articulos, null, 2));//null no filtra y 2 no me acuerdo
 
-          res.redirect('/admin'); // Redirigir a la página de admin después de eliminar
+          res.redirect('/admin'); 
         } else {
           res.status(404).send('Producto no encontrado');
         }
